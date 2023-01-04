@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.4"
 # devise
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
+# devise_invitable
+gem 'devise_invitable', '~> 2.0.6'
+
 # webpacker
 gem 'webpacker', '~> 5.4.3'
 

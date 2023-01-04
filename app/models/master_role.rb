@@ -1,4 +1,4 @@
-class master_role < ApplicationRecord
+class MasterRole < ApplicationRecord
 
     has_many :employees
 
