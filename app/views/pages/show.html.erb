@@ -1,0 +1,54 @@
+<div style="background-image: url(<%=asset_url('annie-spratt-FSFfEQkd1sc-unsplash.jpg')%>);background-size: cover;height: 100vh;">
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <div class="navbar-brand">Employee Portal</div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.paychex.com">Details</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.9)">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Employee Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Designation</th>
+      <th scope="col">Division</th>
+      <th scope="col">Projects</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+    <tr>
+      <th scope="row"><%= employee.id %></th>
+      <td><%= employee.name %></td>
+      <td><%= employee.username %></td>
+      <td><%= employee.email %></td>
+      <td><%= employee.designation.name %></td>
+      <td><%= employee.division.name %></td>
+      <td><% unless employee.projects.empty? %>
+            <%= employee.projects.each {|project| project.name} %>
+          <% else %>
+            None
+          <% end %>  
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<center><p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a></p></center>
+</div>
+</div>
+</div>

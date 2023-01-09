@@ -1,0 +1,28 @@
+<div style="background-image: url(<%=asset_url('annie-spratt-FSFfEQkd1sc-unsplash.jpg')%>);background-size: cover;height: 100vh;">
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <div class="navbar-brand">Employee Portal</div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.paychex.com">Details</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.8)">
+      <h1 class="display-4">PAYCHEX</h1>
+      <p class="lead">One Employee Portal for evreyone and everything.</p>
+      <hr class="my-4">
+      <p>Just hop on to the login page for the best employee experience all in one, easy to use, always accessible, personal and detailed experience.</p>
+    </div>
+  </div>
+
+  <%= render 'devise/sessions/login_form' %>
+</div>

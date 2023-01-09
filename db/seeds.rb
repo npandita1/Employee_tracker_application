@@ -10,7 +10,7 @@ Division.destroy_all
 Designation.destroy_all
 MasterRole.destroy_all
 
-MasterRole.create([{
+MasterRole.create!([{
     name: "HR Manager"
 },
 {
@@ -20,15 +20,15 @@ MasterRole.create([{
     name: "Employee"
 }])
 
-Division.create([{
+Division.create!([{
     name: "Human Resources(HR)"
 }])
 
-Designation.create([{
+Designation.create!([{
     name: "HR Manager"
 }])
 
-Employee.create([{
+Employee.create!({
     name: "Niharika Pandita",
     username: "npandit1",
     email: "npandita1@paychex.com",
@@ -36,7 +36,9 @@ Employee.create([{
     master_role_id: MasterRole.first.id,
     division_id: Division.first.id,
     designation_id: Designation.first.id
-}])
+})
+
+
 
 # masterrole = MasterRole.create([{
 #     name: "HR Manager"

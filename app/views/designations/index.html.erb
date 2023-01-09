@@ -1,0 +1,56 @@
+<div style="background-image: url(<%=asset_url('annie-spratt-FSFfEQkd1sc-unsplash.jpg')%>);background-size: cover;height: 100vh;">
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <div class="navbar-brand">Employee Portal</div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Actions
+          </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="<%= division_new_path %>">Add Division</a></li>
+              <li><a class="dropdown-item" href="<%= designation_new_path %>">Add Designation</a></li>
+              <li><a class="dropdown-item" href="<%= new_employee_registration_path %>">Add Employee</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>
+              <li><a class="dropdown-item" href="<%= division_index_path %>">View Divisions</a></li>
+              <li><a class="dropdown-item" href="<%= designation_index_path %>">View Designations</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.paychex.com">Details</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.8)">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Designation Id</th>
+      <th scope="col">Name</th>
+      <th scope="colgroup">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @designations.each do |designation| %>
+    <tr>
+      <th scope="row"><%= designation.id %></th>
+      <td><%= designation.name %></td>
+      <td><a href="<%= designation_path(designation) %>" class="btn btn-outline-primary">Show</a>
+          <a href="<%= designation_edit_path(designation) %>" class="btn btn-outline-primary">Edit</a>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<center><p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a></p></center>
+</div>
+</div>
+</div>
