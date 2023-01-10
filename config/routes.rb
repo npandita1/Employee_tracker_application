@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :employees #, :skip => [:sessions] #, controllers: {registrations: 'employees/registrations', sessions: 'employees/sessions'}
+  # devise_for :employees #, :skip => [:sessions] #, 
+  # controllers: {registrations: 'employees/registrations', sessions: 'employees/sessions'}
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # root routes
   root "pages#index"
 
   # devise routes
-  
+  devise_for :employees, module: "employees"
 
   # get routes
   get '/employee', to: "pages#dashboard", :as => :employee_root
