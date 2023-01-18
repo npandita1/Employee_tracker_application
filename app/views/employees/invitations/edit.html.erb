@@ -1,7 +1,28 @@
+<div style="background-image: url(<%=asset_url('annie-spratt-FSFfEQkd1sc-unsplash.jpg')%>);background-size: cover;height: 100vh;">
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <div class="navbar-brand">Employee Portal</div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.paychex.com">Details</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>   
+
+<div class="container">
+<div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.8)">
+<center>
+
 <h2><%= t "devise.invitations.edit.header" %></h2>
 
 <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "employees/shared/error_messages", resource: resource %>
+  <%= render "devise/shared/error_messages", resource: resource %>
   <%= f.hidden_field :invitation_token, readonly: true %>
 
   <% if f.object.class.require_password_on_accepting %>
@@ -9,14 +30,24 @@
       <%= f.label :password %><br />
       <%= f.password_field :password %>
     </div>
+    <br/>
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation %>
     </div>
+    <br/>
   <% end %>
 
   <div class="actions">
     <%= f.submit t("devise.invitations.edit.submit_button") %>
   </div>
+  <br/>
 <% end %>
+
+<p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Cancel</a></p>
+
+</center>
+</div>
+</div>
+</div>

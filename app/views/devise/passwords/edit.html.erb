@@ -1,3 +1,24 @@
+<div style="background-image: url(<%=asset_url('annie-spratt-FSFfEQkd1sc-unsplash.jpg')%>);background-size: cover;height: 100vh;">
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <div class="navbar-brand">Employee Portal</div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.paychex.com">Details</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>   
+
+<div class="container">
+<div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.8)">
+<center>
+
 <h2>Change your password</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
@@ -10,16 +31,25 @@
       <em>(<%= @minimum_password_length %> characters minimum)</em><br />
     <% end %>
     <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+  </div><br/>
 
   <div class="field">
     <%= f.label :password_confirmation, "Confirm new password" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  </div><br/>
 
   <div class="actions">
     <%= f.submit "Change my password" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%- if controller_name != 'sessions' %>
+  <%= link_to "Log in", new_session_path(resource_name) %><br />
+<% end %>
+
+<!--<%= render "devise/shared/links" %>-->
+
+</center>
+</div>
+</div>
+</div>

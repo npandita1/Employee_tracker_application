@@ -32,41 +32,13 @@
 
 <div class="container">
 <div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.8)">
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Project Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="colgroup">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if current_employee.master_role.name == "Project Manager" %>
-      <% @projects.each do |project| %>
-      <tr>
-        <th scope="row"><%= project.id %></th>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td style="width:12%"><a href="<%= project_path(project) %>" class="btn btn-outline-primary">Show</a>
-              <a href="<%= project_edit_path(project) %>" class="btn btn-outline-primary">Edit</a>
-        </td>
-      </tr>
-      <% end %>
-    <% else %>
-      <% current_employee.projects.each do |project| %>
-      <tr>
-        <th scope="row"><%= project.id %></th>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td style="width:12%"><a href="<%= project_path(project) %>" class="btn btn-outline-primary">Show</a>
-        </td>
-      </tr>  
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-<center><p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a></p></center>
+<center>
+<h1>Select a Project</h1> <br/>
+
+
+
+<p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a></p>
+</center>
 </div>
 </div>
 </div>

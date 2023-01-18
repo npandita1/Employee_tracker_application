@@ -11,28 +11,16 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Actions
           </a>
-          <% case @employee.master_role_id %>
-          <% when 1 %>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<%= division_new_path %>">Add Division</a></li>
-              <li><a class="dropdown-item" href="<%= designation_new_path %>">Add Designation</a></li>
-              <li><a class="dropdown-item" href="<%= new_employee_registration_path %>">Add Employee</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>
-              <li><a class="dropdown-item" href="<%= division_index_path %>">View Divisions</a></li>
-              <li><a class="dropdown-item" href="<%= designation_index_path %>">View Designations</a></li>
-            </ul>
-          <% when 2 %>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<%= project_new_path %>">Add Project</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="<%= project_index_path %>">View Projects</a></li>
-              <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>
-            </ul>
+          <% case @employee %>
+          <% when "HR Manager" %>
+              <%= render "hr_manager" %>                  
+          <% when "Project Manager" %>
+              <%= render "project_manager" %>
+          <% when "Employee" %>
+              <%= render "employee" %>
           <% else %>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<%= edit_employee_registration_path %>">Edit Profile</a></li>
-            </ul>
+              <%= flash[:alert] = "You must be logged in to access this section" %>
+              <% redirect_to root_path  %>    
           <% end %>
         </li>
         <li class="nav-item">
@@ -49,18 +37,27 @@
 <div class="container">
     <div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.9)">
       <h1 class="display-4">Personal Details</h1>
-      <p class="lead">Name: <%= @employee.name %><br/>
-                      Employee Id: <%= @employee.id %><br/>
-                      Username: <%= @employee.username %><br/>
-                      Email: <%= @employee.email %><br/>
-                      Designation: <%= @employee.designation.name %><br/>
-                      Division: <%= @employee.division.name %></p>
+
+      <p class="lead">Name: <%= current_employee.name %><br/>
+                      Employee Id: <%= current_employee.id %><br/>
+                      Username: <%= current_employee.username %><br/>
+                      Email: <%= current_employee.email %><br/>
+                      Designation: <%= current_employee.designation.name %><br/>
+                      Division: <%= current_employee.division.name %></p>
       <hr class="my-4">
-      <p class="lead">Projects: <% unless @employee.projects.empty? %>
-                                  <%= @employee.projects.each {|project| project.name} %>
+      <p class="lead">Projects: <% unless current_employee.projects.empty? %>
+                                  <%= current_employee.projects.each {|project| project.name} %>
                                 <% else %>
                                   None
                                 <% end %></p>
+
+      <% if @employee=="HR Manager" %>
+        <div>
+          <a href="<%= employee_registration_profile_edit_path(current_employee) %>" class="btn btn-outline-primary">Edit</a>
+        </div><br/> 
+      <% end %>    
+
+      <div><a href="<%= employee_registration_edit_path(current_employee) %>" class="btn btn-outline-primary">Change Password</a></div>                        
     </div>
   </div>
 </div>

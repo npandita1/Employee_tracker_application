@@ -1,4 +1,5 @@
 class DivisionsController < ApplicationController
+    before_action :identify_employee
 
     def index 
         @divisions = Division.all
@@ -35,5 +36,14 @@ class DivisionsController < ApplicationController
             render 'edit'    
         end 
     end    
+
+    private
+
+    def identify_employee 
+        unless current_employee.master_role.name == "HR Manager"
+            flash[:alert] = "You do not have access to this section" 
+            redirect_to employee_root_path 
+        end 
+    end       
 
 end    

@@ -7,17 +7,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if current_employee.master_role.name == "Project Manager" %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               Actions
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<%= project_new_path %>">Add Project</a></li>
+              <li><a class="dropdown-item" href="<%= project_assign_path %>">Assign to Project</a></li>
+              <li><a class="dropdown-item" href="<%= project_remove_path %>">Remove from Project</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<%= project_index_path %>">View Projects</a></li>
               <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>
             </ul>
           </li>  
+        <% end %>  
           <li class="nav-item">
             <a class="nav-link" href="https://www.paychex.com">Details</a>
           </li>
@@ -31,8 +35,31 @@
 <center>
 
 <h1 class="display-4">Project Details</h1> <br/>
-<p class="lead">Name: <%= @project.name %></p>
-<p class="lead">Name: <%= @project.description %></p>
+<h3 class="display-7"><u>Name:</u> <%= @project.name %></h3>
+<h5 class="display-7"><u>Description:</u> <%= @project.description %></h5><br/>
+
+<h4 class="display-6">Employees in the Project</h4> <br/>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Employee Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project.employees.each do |employee| %>
+    <tr>
+      <th scope="row"><%= employee.id %></th>
+      <td><%= employee.name %></td>
+      <td><%= employee.username %></td>
+      <td><%= employee.email %></td>  
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 </center>
 <center><p><a href="<%= project_index_path %>" class="btn btn-outline-primary">Back to Projects</a></p></center>

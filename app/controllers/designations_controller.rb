@@ -1,4 +1,5 @@
 class DesignationsController < ApplicationController
+    before_action :identify_employee
 
     def index 
         @designations = Designation.all
@@ -33,6 +34,15 @@ class DesignationsController < ApplicationController
             redirect_to designation_path(@designation)
         else 
             render 'edit'    
+        end 
+    end    
+
+    private
+
+    def identify_employee 
+        unless current_employee.master_role.name == "HR Manager"
+            flash[:alert] = "You do not have access to this section" 
+            redirect_to employee_root_path 
         end 
     end    
 

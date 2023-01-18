@@ -3,6 +3,8 @@
 class Employees::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_profile_update_params, only: [:update_profile]
+  before_action :identify_employee, :only => [:edit_profile]
 
   # GET /resource/sign_up
   # def new
@@ -38,7 +40,33 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  def edit_profile
+    @edit_employee = Employee.find(params[:id])
+  end 
+  
+  def update_profile 
+    @edit_employee = Employee.find(params[:id])
+    if @edit_employee.update_without_password(params.require(:employee).permit(:name, :username, :email, :division_id, :designation_id, :division_id, :master_role_id))
+      flash[:notice] = "Profile was successfully updated!"
+      if @edit_employee == current_employee 
+        redirect_to employee_root_path
+      else  
+        redirect_to employees_list_path
+      end  
+    else  
+      flash[:alert] = "Profile can not be updated!"  
+      render 'edit_profile'
+    end  
+  end  
+
+  protected
+
+  def identify_employee 
+    unless current_employee.master_role.name == "HR Manager"
+        flash[:alert] = "You do not have access to this section" 
+        redirect_to employee_root_path 
+    end 
+  end       
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -46,8 +74,13 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
+  def configure_profile_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :username, :email, :division_id, :designation_id,
+                                      :division_id, :master_role_id])
+  end
+  
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])    
   # end
 
   # The path used after sign up.

@@ -17,7 +17,7 @@
 
 <div class="container">
 <div class="p-5 rounded-lg m-3", style="background: rgba(255, 255, 255, 0.9)">
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Employee Id</th>
@@ -27,6 +27,7 @@
       <th scope="col">Designation</th>
       <th scope="col">Division</th>
       <th scope="col">Projects</th>
+      <th scope="colgroup">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -44,11 +45,23 @@
             None
           <% end %>  
       </td>
+      <td><% if @employee=="HR Manager" %>
+            <% unless employee.master_role.name=="HR Manager" %>
+              <a href="<%= employee_registration_profile_edit_path(employee) %>" class="btn btn-outline-primary">Edit</a>
+            <% end %>
+          <% elsif @employee=="Project Manager" %>
+            <% unless employee.master_role.name=="HR Manager" || employee.master_role.name=="Project Manager" %>
+              <a href="<%= employee_registration_profile_edit_path(employee) %>" class="btn btn-outline-primary">Project Update</a>
+            <% end %>
+          <% end %>  
+      </td>    
     </tr>
     <% end %>
   </tbody>
 </table>
-<center><p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a></p></center>
+<center><p>
+<a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a> 
+</p></center>
 </div>
 </div>
 </div>

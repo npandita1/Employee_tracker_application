@@ -34,7 +34,34 @@
 <center>
 
 <h1 class="display-4">Division Details</h1> <br/>
-<p class="lead">Name: <%= @division.name %></p>
+<h3 class="display-7"><u>Name: </u><%= @division.name %></h3><br/>
+
+<h4 class="display-6">Employees in the Division</h4> <br/>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Employee Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="colgroup">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @division.employees.each do |employee| %>
+    <tr>
+      <th scope="row"><%= employee.id %></th>
+      <td><%= employee.name %></td>
+      <td><%= employee.username %></td>
+      <td><%= employee.email %></td>
+      <td><% unless current_employee==employee %>
+            <a href="<%= employee_registration_edit_path(employee) %>" class="btn btn-outline-primary">Edit</a>
+          <% end %>
+      </td>    
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 </center>
 <center><p><a href="<%= division_index_path %>" class="btn btn-outline-primary">Back to Divisions</a></p></center>
