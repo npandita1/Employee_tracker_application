@@ -26,7 +26,7 @@
         <li class="nav-item">
           <a class="nav-link" href="https://www.paychex.com">Details</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" style="margin-top:5px;margin-left:15px;">
            <%= button_to '<i class="icon-ok icon-white" aria-current="page"></i>Sign Out'.html_safe, destroy_employee_session_path, method: :delete %>
         </li>
       </ul>
@@ -46,7 +46,9 @@
                       Division: <%= current_employee.division.name %></p>
       <hr class="my-4">
       <p class="lead">Projects: <% unless current_employee.projects.empty? %>
-                                  <%= current_employee.projects.each {|project| project.name} %>
+                                  <% current_employee.projects.each do |project| %>
+                                    <%= project.name %>
+                                  <% end %>  
                                 <% else %>
                                   None
                                 <% end %></p>

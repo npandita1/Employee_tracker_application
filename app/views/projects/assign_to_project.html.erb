@@ -14,8 +14,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<%= project_new_path %>">Add Project</a></li>
-              <li><a class="dropdown-item" href="<%= project_assign_path %>">Assign to Project</a></li>
-              <li><a class="dropdown-item" href="<%= project_remove_path %>">Remove from Project</a></li>
+              <li><a class="dropdown-item" href="<%= project_assign_path(Project) %>">Assign to Project</a></li>
+              <li><a class="dropdown-item" href="<%= project_remove_path(Project) %>">Remove from Project</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<%= project_index_path %>">View Projects</a></li>
               <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>
@@ -36,22 +36,48 @@
 <h1>Select a Project</h1> <br/>
 
 <% if current_employee.master_role.name == "Project Manager" %>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              Actions
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<%= project_new_path %>">Add Project</a></li>
-              <li><a class="dropdown-item" href="<%= project_assign_path %>">Assign to Project</a></li>
-              <li><a class="dropdown-item" href="<%= project_remove_path %>">Remove from Project</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="<%= project_index_path %>">View Projects</a></li>
-              <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>
-            </ul>
-        </div>  
+  <div class="dropdown-center">
+    <button class="btn btn-secondary btn-lg dropdown-toggle bg-primary" style="width:400px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Select a Project
+    </button>
+    <ul class="dropdown-menu">
+      <% @projects.each do |project| %>
+        <li><a class="dropdown-item" href="<%= project_assign_path(:id => project) %>"><%= project.name %></a></li>
       <% end %>
+    </ul>
+  </div><br/>         
+<% end %>
 
-<p><a href="<%= employee_root_path %>" class="btn btn-outline-primary">Back to Dashboard</a></p>
+<% if params[:id] != "Project" %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Employee Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Division</th>
+        <th scope="colgroup">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @employees.each do |employee| %>
+        <tr>
+          <th scope="row"><%= employee.id %></th>
+          <td><%= employee.name %></td>
+          <td><%= employee.username %></td>
+          <td><%= employee.email %></td>
+          <td><%= employee.designation.name %></td>
+          <td><%= employee.division.name %></td>
+          <td><%= button_to 'Add', project_assign_to_path(@project, :employee_id => employee), method: :post %></td>
+        </tr>
+      <% end %>  
+    </tbody>
+  </table>    
+<% end %> <br/>
+
+<p><a href="<%= employee_root_path %>" data-method="post" class="btn btn-outline-primary">Back to Dashboard</a></p>
 </center>
 </div>
 </div>

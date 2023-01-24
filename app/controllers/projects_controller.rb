@@ -40,10 +40,37 @@ class ProjectsController < ApplicationController
 
     def assign_to_project  
         @projects = Project.all
+        if ( params[:id] != "Project" ) 
+            @project = Project.find(params[:id])
+            @employees = Employee.all.reject{|employee| employee.projects.include?Project.first}
+        end
     end   
+
+    def assign
+        @project = Project.find(params[:id])
+        employee = Employee.find(params[:employee_id]) 
+        if team = Team.create(project_id: @project.id, employee_id: employee.id)
+            flash[:notice] = "Successfully Assigned"
+            redirect_to project_assign_path(@project)
+        else 
+            render 'assign_to_project'    
+        end    
+    end    
     
     def remove_from_project  
         @projects = Project.all
+        if ( params[:id] != "Project" ) 
+            @project = Project.find(params[:id])
+            @employees = Employee.all.select{|employee| employee.projects.include?Project.first}
+        end
+    end    
+
+    def remove 
+        project_id = params[:id]
+        team = Team.find_by(params[:employee_id], project_id)
+        # team = Team.all.select{|team| team.project_id == @project.id && team.employee_id == employee.id}
+        team.destroy
+        redirect_to project_remove_path(project_id)
     end    
 
     private

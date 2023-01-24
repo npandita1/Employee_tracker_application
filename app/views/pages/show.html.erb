@@ -40,18 +40,21 @@
       <td><%= employee.designation.name %></td>
       <td><%= employee.division.name %></td>
       <td><% unless employee.projects.empty? %>
-            <%= employee.projects.each {|project| project.name} %>
+            <% current_employee.projects.each do |project| %>
+              <%= project.name %>
+            <% end %>  
           <% else %>
             None
           <% end %>  
       </td>
-      <td><% if @employee=="HR Manager" %>
+      <td style="width:16%"><% if @employee=="HR Manager" %>
             <% unless employee.master_role.name=="HR Manager" %>
               <a href="<%= employee_registration_profile_edit_path(employee) %>" class="btn btn-outline-primary">Edit</a>
             <% end %>
           <% elsif @employee=="Project Manager" %>
-            <% unless employee.master_role.name=="HR Manager" || employee.master_role.name=="Project Manager" %>
-              <a href="<%= employee_registration_profile_edit_path(employee) %>" class="btn btn-outline-primary">Project Update</a>
+            <% unless employee.master_role.name=="Project Manager" %>
+              <a href="<%= project_assign_path(Project) %>" class="btn btn-outline-primary">Assign</a>
+              <a href="<%= project_remove_path(Project) %>" class="btn btn-outline-primary">Remove</a>
             <% end %>
           <% end %>  
       </td>    

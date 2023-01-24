@@ -11,7 +11,7 @@ class Employee < ApplicationRecord
            :trackable, :lockable, :timeoutable
 
     ## Associations       
-    has_many :teams
+    has_many :teams, dependent: :destroy 
     has_many :projects, through: :teams
     belongs_to :division
     belongs_to :master_role

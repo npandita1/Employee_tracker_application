@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
     include PagesHelper
-    skip_before_action :require_login, :only => [:index]
+    skip_before_action :authenticate_employee!, :only => [:index]
     before_action :identify_employee, :except => [:index]
      
     def index 
@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     end    
 
     def dashboard
-              
+                             
     end     
 
     def show 

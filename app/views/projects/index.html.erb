@@ -14,8 +14,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<%= project_new_path %>">Add Project</a></li>
-              <li><a class="dropdown-item" href="<%= project_assign_path %>">Assign to Project</a></li>
-              <li><a class="dropdown-item" href="<%= project_remove_path %>">Remove from Project</a></li>
+              <li><a class="dropdown-item" href="<%= project_assign_path(Project) %>">Assign to Project</a></li>
+              <li><a class="dropdown-item" href="<%= project_remove_path(Project) %>">Remove from Project</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<%= project_index_path %>">View Projects</a></li>
               <li><a class="dropdown-item" href="<%= employees_list_path %>">View Employees</a></li>

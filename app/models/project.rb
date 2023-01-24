@@ -5,7 +5,7 @@ class Project < ApplicationRecord
    validates :description, presence: true, length: { minimum: 6, maximum: 400 } 
    
    ## Associations
-   has_many :teams
+   has_many :teams, dependent: :destroy
    has_many :employees, through: :teams
 
 end   

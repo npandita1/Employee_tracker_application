@@ -1,5 +1,5 @@
 class Employees::InvitationsController < Devise::InvitationsController
-  skip_before_action :require_login, only: [:edit, :update]
+  skip_before_action :authenticate_employee!, only: [:edit, :update]
   before_action :configure_permitted_parameters, only: [:new, :create]
   before_action :configure_permition_parameters, only: [:edit, :update]
 

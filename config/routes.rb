@@ -36,8 +36,8 @@ Rails.application.routes.draw do
   get '/employee/project/index', to: "projects#index", as: 'project_index'
   get '/employee/project/edit/:id', to: "projects#edit", as: 'project_edit'
   get '/employee/project/show/:id', to: "projects#show", as: 'project' 
-  get 'employee/project/assign', to: "projects#assign_to_project", as: 'project_assign'
-  get 'employee/project/remove', to: "projects#remove_from_project", as: 'project_remove'
+  get 'employee/project/assign/:id', to: "projects#assign_to_project", as: 'project_assign'
+  get 'employee/project/remove/:id', to: "projects#remove_from_project", as: 'project_remove'
 
   # post put patch routes
   post 'designations', to: 'designations#create'
@@ -51,5 +51,9 @@ Rails.application.routes.draw do
   post 'projects', to: 'projects#create'
   patch  '/projects/:id', to: 'projects#update', as: 'project_update'
   put   '/projects/:id', to: 'projects#update'
+  post 'projects/assign/:id', to: 'projects#assign', as: 'project_assign_to' 
+
+  # delete routes
+  delete 'projects/remove/:id', to: 'projects#remove', as: 'project_remove_from'
 
 end
